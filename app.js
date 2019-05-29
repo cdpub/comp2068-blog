@@ -11,6 +11,7 @@ app.get(`/about`, (require, response) => {
     response.send(`It's a cold dark rainy day in Pizzaville.`);
 });
 
-
-app.listen(4000, () => console.log(`Listening on port 4000`));    //create a listener port (takes 2 argument - port and callback)
+// create dynamic port
+const port = process.env.PORT || 4000;       
+app.listen(port, () => console.log(`Listening on port ${port}`));    //create a listener port (takes 2 argument - port and callback)
 
