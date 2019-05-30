@@ -3,13 +3,20 @@ const express = require(`express`);         //import 'express' library using req
 
 const app = express();                      //assign express to app
 
-app.get(`/`, (require, response) => {       //create routes for get
-    response.send(`Welcome to our very plain site.`);
-});
+//create routes
+const routes = require(`./routes.js`);
+app.use(`/`, routes);                      //use middleware using the word "use"
 
-app.get(`/about`, (require, response) => {       
-    response.send(`It's a cold dark rainy day in Pizzaville.`);
-});
+// view config
+const path = require(`path`);
+app.set(`views`, path.join(__dirname, `views`));
+app.set(`view engine`, `pug`);
+
+//create asset pipeline; Express app.use method allows middleware action to route
+app.use('/css', express.static('assets/stylesheets'));
+app.use('/js', express.static('assets/javascripts'));
+app.use('/images', express.static('assets/images'));
+
 
 // create dynamic port
 const port = process.env.PORT || 4000;       
