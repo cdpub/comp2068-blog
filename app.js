@@ -1,3 +1,15 @@
+require(`dotenv`).config();
+
+const mongoose = require(`mongoose`);
+mongoose.connect(process.env.DB_URI, {
+    auth:   {
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD
+    },
+    userNewUrlParser: true
+}).catch(err => console.log(`ERROR: ${err}`));
+
+
 //create a node server
 const express = require(`express`);         //import 'express' library using require
 
